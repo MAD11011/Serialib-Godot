@@ -2,7 +2,7 @@
 import os
 import sys
 
-env = SConscript("../godot-cpp/SConstruct")
+env = SConscript("./godot-cpp/SConstruct")
 env.Tool('compilation_db')
 cdb = env.CompilationDatabase('compile_commands.json')
 Alias('cdb', cdb)
