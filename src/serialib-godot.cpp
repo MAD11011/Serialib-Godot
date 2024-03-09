@@ -10,7 +10,8 @@
 #include <unistd.h> 
 #include <dirent.h> 
 #elif defined(_WIN32) || defined(WIN32) 
-
+#include <windows.h>
+#include <winbase.h>
 #define OS_Windows
 
 #endif
@@ -138,7 +139,20 @@ TypedArray<String> SerialDevice::get_devices(){
 TypedArray<String> arr;
 
 #ifdef OS_Windows
- /* Windows code */
+/* Windows code */
+char device_name[32] = {0};
+
+for(int i=0;i<256;i++){
+    char tmp [256] = {0}; 
+    sprintf(device_name,"COM%d",i);
+    int size = QueryDosDeviceA(device,tmp,sizeof(tmp));
+    if(size > 0){
+        String device(\\.\COM);
+        device + i;
+        arr.append(device);
+    }
+
+}
 #else
     DIR *d;
     dirent *dir;
