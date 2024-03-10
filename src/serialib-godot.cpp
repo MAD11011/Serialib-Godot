@@ -122,10 +122,12 @@ String SerialDevice::read_string(String delimiter,unsigned int max,unsigned int 
 };
 
 
+/*
 int SerialDevice::read_bytes(PackedByteArray byte_buf,unsigned int max,unsigned int timeout_ms,unsigned int sleepdur_us ){
     byte_buf.resize(max);
     return _device.readBytes((void*)byte_buf.ptrw(),max,timeout_ms,sleepdur_us);
 }
+*/
 
 int SerialDevice::is_available(){
     return _device.available();
@@ -145,10 +147,10 @@ char device_name[32] = {0};
 for(int i=0;i<256;i++){
     char tmp [256] = {0}; 
     sprintf(device_name,"COM%d",i);
-    int size = QueryDosDeviceA(device,tmp,sizeof(tmp));
+    int size = QueryDosDeviceA(device_name,tmp,sizeof(tmp));
     if(size > 0){
-        String device(\\.\COM);
-        device + i;
+        String device("\\\\.\\COM{}");
+        device.format(i);
         arr.append(device);
     }
 

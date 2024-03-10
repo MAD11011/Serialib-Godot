@@ -35,9 +35,9 @@ class SerialDevice : public Node {
     bool write_bytes(PackedByteArray byte_buf);
     String read_string(String delimiter,unsigned int max,unsigned int timeout_ms);
 #ifdef __unix__         
-    int  read_bytes(PackedByteArray byte_buf,unsigned int max,unsigned int timeout_ms,unsigned int sleepdur_us = 100);
+    //int  read_bytes(PackedByteArray byte_buf,unsigned int max,unsigned int timeout_ms,unsigned int sleepdur_us = 100);
 #elif defined(_WIN32) || defined(WIN32) 
-    int  read_bytes(PackedByteArray &byte_buf,unsigned int max,unsigned int timeout_ms);
+    //int  read_bytes(PackedByteArray &byte_buf,unsigned int max,unsigned int timeout_ms);
 #endif
     int  is_available();
     void flush();
